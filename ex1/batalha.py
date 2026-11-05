@@ -92,7 +92,7 @@ def classificar_resultado(vida, vida_max):
         tocar_audio("vitória-apertada.mp3")
         print("Vitória apertada")
         return "Vitória apertada"
-classificar_resultado(100, 100)
+
 
 
 def ler_acao():
