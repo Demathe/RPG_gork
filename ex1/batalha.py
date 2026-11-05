@@ -12,8 +12,16 @@ TAREFA: complete as funções marcadas com TODO. Apague a linha
 Para conferir, rode o arquivo testes_ex1.py.
 """
 
-import random
+import random, pygame, os
+pygame.mixer.init()
+PASTA = os.path.dirname(os.path.abspath(__file__))
 
+def tocar_audio(nome):
+    pygame.mixer.music.load(os.path.join(PASTA, nome))
+    pygame.mixer.music.play()
+
+    while pygame.mixer.music.get_busy():
+        pygame.time.Clock().tick(10)
 
 def calcular_dano(ataque, defesa, critico=False):
     """Dano = ataque - defesa, mas nunca menos que 1.
@@ -61,12 +69,30 @@ def barra_de_vida(vida, vida_max, tamanho=10):
 
 def classificar_resultado(vida, vida_max):
     """Diz como foi a batalha olhando a vida que sobrou para o herói:
-        vida igual a 0              -> "Derrota"
-        vida igual a vida_max       -> "Vitória perfeita"
-        vida >= metade de vida_max  -> "Vitória"
-        senão                       -> "Vitória apertada" """
-    # TODO: use if / elif / else
-    raise NotImplementedError
+        vida igual a 0              -> "Derrota" K.O
+        vida igual a vida_max       -> "Vitória perfeita" PERFECT
+        vida >= metade de vida_max  -> "Vitória" smash bros
+        senão                       -> "Vitória apertada" SENA WIN """
+    if vida == 0:
+        tocar_audio("defeat.mp3")
+        print("Derrota")
+        return "Derrota"
+
+    elif vida == vida_max:
+        tocar_audio("perfect.mp3")
+        print("Vitória perfeita")
+        return "Vitória perfeita"
+
+    elif vida >= vida_max / 2:
+        tocar_audio("victory.mp3")
+        print("Vitória")
+        return "Vitória"
+
+    else:
+        tocar_audio("vitória-apertada.mp3")
+        print("Vitória apertada")
+        return "Vitória apertada"
+classificar_resultado(100, 100)
 
 
 def ler_acao():
