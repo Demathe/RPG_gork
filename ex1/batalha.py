@@ -178,7 +178,6 @@ def batalha(heroi, inimigo, pocoes=3):
 
             critico = (r == 10)
             erro_critico = (r == 1)
-
             dano = calcular_dano(
                 heroi["ataque"], inimigo["defesa"], critico, erro_critico
             )
