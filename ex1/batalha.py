@@ -36,7 +36,7 @@ def tocar_audio(nome):
     caminho_audio = None
 
     # Procura o áudio nas pastas e subpastas
-    for raiz, pastas, arquivos in os.walk(PASTA):
+    for raiz, pastas, arquivos in os.walk(os.path.join(PASTA, "sonds")):
         if nome in arquivos:
             caminho_audio = os.path.join(raiz, nome)
             break
